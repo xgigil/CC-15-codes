@@ -15,7 +15,7 @@ class Ui_MainWindow(object):
         MainWindow.setEnabled(True)
         MainWindow.resize(630, 373)
         MainWindow.setMinimumSize(QtCore.QSize(630, 373))
-        MainWindow.setWindowOpacity(1.0)
+        MainWindow.setWindowOpacity(-2.0)
         MainWindow.setAutoFillBackground(False)
         MainWindow.setStyleSheet("QMainWindow {\n"
 "    background-color: rgb(229, 222, 226)\n"
@@ -719,13 +719,3 @@ class Ui_MainWindow(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:28pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec())
