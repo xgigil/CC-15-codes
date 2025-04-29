@@ -57,9 +57,13 @@ class DatabaseApp(QMainWindow):
             if connection:
                 cursor = connection.cursor()
 
-                c_query = "SELECT * FROM accounts WHERE username = %s"
-                c_values = (self.username_input.text())
-                cursor.execute(c_query, c_values)
+                if not self.username_input.text() or not self.password_input.text() or not self.email_input.text():
+                    QMessageBox.warning(self, "Input Error", "All fields must be filled.")
+                    return
+
+                check_query = "SELECT * FROM accounts WHERE username = %s"
+                check_value = (self.username_input.text(),)
+                cursor.execute(check_query, check_value)
                 user = cursor.fetchone()
 
                 if user:
@@ -73,13 +77,11 @@ class DatabaseApp(QMainWindow):
                 cursor.execute(query,values)
                 connection.commit()
 
-                if not self.username_input.text() or self.password_input.text() or self.email_input.text():
-                    QMessageBox.warning(self, "Input Error", "All fields must be filled.")
-                else:
-                    QMessageBox.information(self, "Success", "Account Registered!")
+                QMessageBox.information(self, "Success", "Account Registered!")
 
                 cursor.close()
                 connection.close()
+
         except Error as e:
             QMessageBox.critical(self, "Error", f"Error connecting to database: {e}")
 
