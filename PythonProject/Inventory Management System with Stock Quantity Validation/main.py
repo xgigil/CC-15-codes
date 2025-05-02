@@ -51,19 +51,27 @@ class DatabaseApp(QMainWindow):
             connection = self.connect_to_database()
             if connection:
                 cursor = connection.cursor()
+                errors = []
 
                 if not self.productName_input.text() or not self.productQuantity_input.text() or not self.productPrice_input.text():
-                    QMessageBox.warning(self, "Input Error", "All fields must be filled.")
-                    return
-
-                if not self.productQuantity_input.text().isdigit() >= 0:
-                    QMessageBox.warning(self, "Quantity Error", "Quantity must be a valid whole number")
-                    return
+                    errors.append("All fields must be filled.")
 
                 try:
-                    float(self.productPrice_input.text())
+                    quantity_input = int(self.productQuantity_input.text())
+                    if quantity_input <= 0:
+                        errors.append("Quantity must be greater than zero.")
                 except ValueError:
-                    QMessageBox.warning(self, "Price Error", "Price must be a valid positive number")
+                    errors.append("Quantity must be a positive integer.")
+
+                try:
+                    price_input = float(self.productPrice_input.text())
+                    if price_input <= 0:
+                        errors.append("Price must be greater than zero.")
+                except ValueError:
+                    errors.append("Price must be a positive decimal number.")
+
+                if errors:
+                    QMessageBox.warning(self, "Input Errors", "\n".join(errors))
                     return
 
                 check_query = "SELECT * FROM inventory WHERE product_name = %s"
