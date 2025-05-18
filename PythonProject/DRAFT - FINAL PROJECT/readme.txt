@@ -8,36 +8,26 @@ username, password: bloi, bloi
 
 
 Admin credentials:
-username: aDmIn
-password: siadminni@123
+username: admin
+password: gailangadmin@123
 
 
+TO DO:
+Overall:
+1. Any deletion is still not working (ang ako na figure out ra nga method is soft deleting, meaning dili mawala sa database ang account pero dili lang siya ma gamit for login)
+2. Deletion Request buttons dont work for both admin and executive
 
-Proposed Functionalities of each Role:
-Admin Account:
-1. A single, pre-created account within the system. The admin has unrestricted access to all system functionalities and user information.
+Admin:
+1. View system logs fails.
+2. Edit button needs rework. Not clear which row it is editing.
 
-Executive Accounts: Executives have broader access compared to regular members. They can:
-1. Create accounts (but require confirmation from other executives before activation).
-2. Confirm new registrations submitted through the registration form to prevent people not part of the organization from creating an account.
-3. Update their own profile information and account details.
-4. Limited ability to update profile information of other accounts.
-5. Read the full information of all accounts as well as their information in the system.
-6. Delete accounts if necessary. However, it requires confirmation from other executive accounts.
-7. Request deletion of their own profile (requires executive confirmation).
-
-Member Accounts: Members have more limited access. They can:
-1. Create an account (but require confirmation from executives before activation).
-2. Update only their own profile information and account details.
-3. Read information from other members' profiles, but only limited details are visible.
-4. Request deletion of their own profile (requires executive confirmation).
+Executive:
+1. If they have made a deletion request, their username should not appear in their deletion requests table
+2. add view inactive users
+3. manage user profile should have search function. and be put in main area
 
 
-
-Proposed Tables:
-1. account_status table (enum(active, pending, inactive), reason, accepted_by(this is user_id))
-2. profiles table (dependent siya sa accounts, diri ibutang ang other info about sa user)
-3. accounts table (add foreign key of account_status table)
-4. creation_request (for handling the account creaction request)
-5. deletion_request (for handling deletion request)
+BUGS:
+1. When editing your own username, it will bug and would need to login then logout again.
+2. Bug ib Account Setting in Profile Menu.
 
